@@ -1,10 +1,27 @@
+{#<!DOCTYPE html>#}
+{##}
+{#<>#}
+{#<header>#}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">#}
+{#</header>#}
+{% extends "events/base.html" %}
+
+
+{#<body>#}
+<p>
 {% block content %}
     {% for event in events %}
         <h1>{{ event.author }}</h1>
         <h2>{{ event.title }}</h2>
         <h3>{{ event.content }}</h3>
         <h4>{{ event.date_posted }}</h4>
+        <h5>Users subscribed: {{ event.subscribed }}</h5>
     {% endfor %}
 {% endblock content %}
+<p>
+{#</body>#}
+
+{#</html>#}
+
 
 

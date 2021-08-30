@@ -8,3 +8,5 @@ def home(request):
         'events': Event.objects.all()
     }
     return render(request, 'events/events.html', context)
+
+

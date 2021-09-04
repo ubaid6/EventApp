@@ -11,6 +11,7 @@ class Event(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     subscribed = models.IntegerField(default=0)
 
+
 class UserEventInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)

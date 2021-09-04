@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import RegistrationForm, ChangeForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -17,6 +18,11 @@ def register(request):
         form = RegistrationForm()
     return render(request, 'users/register.html', {'form': form})
 
+def viewprofile(request):
+    args = {
+        'user' : request.user
+    }
+    return render(request, 'users/viewprofile.html', args)
 
 def editprofile(request):
     if request.method == "POST":

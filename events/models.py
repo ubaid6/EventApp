@@ -10,3 +10,9 @@ class Event(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     subscribed = models.IntegerField(default=0)
+
+class UserEventInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    isAttending = models.BooleanField(default=False)
+    isCreator = models.BooleanField(default=False)

@@ -12,6 +12,12 @@
 <p>
 {% block content %}
     {% for event in events %}
+        {% for evInfo in eventinfo %}
+            {% if evInfo.event == event and evInfo.user == request.user and evInfo.isCreator == True %}
+                <a href={% url 'edit' event.pk %}>Edit</a>
+                <a href={% url 'delete' event.pk %}>Delete</a>
+            {% endif %}
+        {% endfor %}
         <h1>{{ event.author }}</h1>
         <h2>{{ event.title }}</h2>
         <h3>{{ event.content }}</h3>

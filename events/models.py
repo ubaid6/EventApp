@@ -10,6 +10,7 @@ class Event(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    shouldAttend = models.BooleanField(default=False)
     subscribed = models.IntegerField(default=0)
 
     def get_absolute_url(self):
@@ -21,3 +22,9 @@ class UserEventInfo(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     isAttending = models.BooleanField(default=False)
     isCreator = models.BooleanField(default=False)
+
+    def function(self):
+        if self.isCreator == True:
+            self.user = self.event.author
+            self.save()
+

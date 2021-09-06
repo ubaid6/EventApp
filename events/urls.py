@@ -8,5 +8,6 @@ urlpatterns = [
     path('create/', views.create, name='create'),
     path('editevent/<int:pk>', editEvent.as_view(), name='edit'),
     path('deleteevent/<int:pk>', deleteEvent.as_view(), name='delete'),
+    path('subscribe/<int:id>', views.attend, name='attend'),
 
 ]

@@ -1,23 +1,29 @@
-{#<!DOCTYPE html>#}
-{##}
-{#<>#}
-{#<header>#}
-{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">#}
-{#</header>#}
 {% extends "events/base.html" %}
 
-
-{#<body>#}
 
 <p>
 {% block content %}
     {% for event in events %}
-        {% for evInfo in eventinfo %}
-            {% if evInfo.event == event and evInfo.user == request.user and evInfo.isCreator == True %}
-                <a href={% url 'edit' event.pk %}>Edit</a>
-                <a href={% url 'delete' event.pk %}>Delete</a>
-            {% endif %}
-        {% endfor %}
+{#        {% for evInfo in eventinfo %}#}
+        {% if event.shouldAttend == True %}
+            <a href={% url 'attend' event.pk %}>Attend</a>
+        {% else %}
+            <p>You are attending</p>
+        {% endif %}
+{#            {% if evInfo.event == event and evInfo.user == request.user and evInfo.isAttending %}#}
+{#                <p>You are attending this event</p>#}
+{#            {% elif evInfo.event == event and evInfo.user != request.user %}#}
+{#                <a href={% url 'attend' event.pk %}>Attend</a>#}
+{#            {% endif %}#}
+
+{#        {% endfor %}#}
+{#            {% if evInfo.event == event and evInfo.user == request.user and evInfo.isCreator == True %}#}
+
+        {% if event.author == request.user %}
+            <a href={% url 'edit' event.pk %}>Edit</a>
+            <a href={% url 'delete' event.pk %}>Delete</a>
+        {% endif %}
+{#        {% endfor %}#}
         <h1>{{ event.author }}</h1>
         <h2>{{ event.title }}</h2>
         <h3>{{ event.content }}</h3>
@@ -26,9 +32,5 @@
     {% endfor %}
 {% endblock content %}
 <p>
-{#</body>#}
-
-{#</html>#}
-
 
 

@@ -6,7 +6,7 @@ from django.contrib.auth.forms import forms
 from .forms import CreateEvent
 from .models import Event, UserEventInfo
 from django.contrib import messages
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView, DeleteView
 
 # Create your views here.
@@ -22,7 +22,7 @@ def home(request):
     n = 0
     for event in Event.objects.all():
         for evInfo in UserEventInfo.objects.all():
-            if evInfo.event == event and evInfo.user == request.user and (evInfo.isAttending == True or evInfo.isCreator == True):
+            if evInfo.event == event and evInfo.user == request.user and (evInfo.isAttending == True):
                 event.shouldAttend = False
                 break
             else:
@@ -70,6 +70,7 @@ class editEvent(UpdateView):
     fields = ['title', 'content']
     template_name = 'events/editevent.html'
 
+
 class deleteEvent(DeleteView):
     model = Event
     template_name = 'events/delete.html'
@@ -89,6 +90,21 @@ def attend(request, id):
     userEventInfo.save()
     messages.success(request, f'You have subscribed to {event.title}!')
     return redirect('events-home')
+
+
+@login_required(login_url='login')
+def unattend(request, id):
+    event = Event.objects.get(pk=id)
+    for eventInfo in UserEventInfo.objects.all():
+        if eventInfo.event == event and eventInfo.user == request.user and eventInfo.isAttending == True:
+            eventInfo.delete()
+            event.subscribed -= 1
+            event.save()
+
+    messages.success(request, f'You have unsubscribed from {event.title}')
+    return redirect('events-home')
+
+
 
 
 

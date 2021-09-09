@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect, reverse
 
 # Create your models here.
 
+
+
 class Event(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()

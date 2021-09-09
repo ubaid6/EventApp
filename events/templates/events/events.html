@@ -4,26 +4,15 @@
 <p>
 {% block content %}
     {% for event in events %}
-{#        {% for evInfo in eventinfo %}#}
         {% if event.shouldAttend == True %}
-            <a href={% url 'attend' event.pk %}>Attend</a>
+            <a href={% url 'attend' event.pk %}>Subscribe</a>
         {% else %}
-            <p>You are attending</p>
+            <a href={% url 'unattend' event.pk %}>Unsubscribe</a>
         {% endif %}
-{#            {% if evInfo.event == event and evInfo.user == request.user and evInfo.isAttending %}#}
-{#                <p>You are attending this event</p>#}
-{#            {% elif evInfo.event == event and evInfo.user != request.user %}#}
-{#                <a href={% url 'attend' event.pk %}>Attend</a>#}
-{#            {% endif %}#}
-
-{#        {% endfor %}#}
-{#            {% if evInfo.event == event and evInfo.user == request.user and evInfo.isCreator == True %}#}
-
         {% if event.author == request.user %}
             <a href={% url 'edit' event.pk %}>Edit</a>
             <a href={% url 'delete' event.pk %}>Delete</a>
         {% endif %}
-{#        {% endfor %}#}
         <h1>{{ event.author }}</h1>
         <h2>{{ event.title }}</h2>
         <h3>{{ event.content }}</h3>

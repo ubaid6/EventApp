@@ -6,7 +6,7 @@ from django.contrib.auth.forms import forms
 from .forms import CreateEvent
 from .models import Event, UserEventInfo
 from django.contrib import messages
-# from django.contrib.auth.models import User
+from users.models import User
 from django.views.generic.edit import UpdateView, DeleteView
 
 # Create your views here.

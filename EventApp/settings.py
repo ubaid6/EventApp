@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'events.apps.EventsConfig',
     'users.apps.UsersConfig',
+    'events.apps.EventsConfig',
+    'users1.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,3 +131,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'events-home'
 
 LOGOUT_REDIRECT_URL = 'events-home'
+
+AUTH_USER_MODEL = 'users.User'
+

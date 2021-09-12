@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +34,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'events.apps.EventsConfig',
-    'users1.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,4 +133,15 @@ LOGIN_REDIRECT_URL = 'events-home'
 LOGOUT_REDIRECT_URL = 'events-home'
 
 AUTH_USER_MODEL = 'users.User'
+
+# EMAIL CONFIG
+
+
+EMAIL_FROM_USER = os.environ.get('DjangoEmail')
+EMAIL_HOST= 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('DjangoEmail')
+EMAIL_HOST_PASSWORD = os.environ.get('DjangoPass')
+EMAIL_USE_TLS = True
+EMAIL_PORT= 587
+
 

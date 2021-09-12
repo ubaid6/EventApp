@@ -23,8 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('events.urls')),
     path('register/', user_views.register),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    # path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('login/', user_views.login, name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('editprofile/', user_views.editprofile),
     path('viewprofile/', user_views.viewprofile),
+    path('emailactivate/<uidb64>/<token>', user_views.activateEmail, name='activate')
 ]

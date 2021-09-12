@@ -13,6 +13,9 @@ from django.views.generic.edit import UpdateView, DeleteView
 
 @login_required(login_url='login')
 def home(request):
+
+    print(request.user.emailAuthenticated)
+
     for object in UserEventInfo.objects.all():
         object.function()
 

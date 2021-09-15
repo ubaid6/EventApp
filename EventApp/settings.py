@@ -136,7 +136,6 @@ AUTH_USER_MODEL = 'users.User'
 
 # EMAIL CONFIG
 
-
 EMAIL_FROM_USER = os.environ.get('DjangoEmail')
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get('DjangoEmail')

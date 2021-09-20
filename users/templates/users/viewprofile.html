@@ -1,11 +1,23 @@
 {% extends "events/base.html" %}
 
 
-<p>
 {% block content %}
-    <h1>{{ user.first_name }}</h1<br>
-    <h1>{{ user.last_name }}</h1<br>
-    <h1>{{ user.username }}</h1<br>
-    <h1>{{ user.email }}</h1<br>
+    <div class="container" style="float: center; width:800px; background-color: #88baba; border-radius: 10px;">
+        <br>
+        <h5 style="color:white">First Name</h5>
+        <h1>{{ user.first_name }}</h1>
+        <hr class="solid">
+        <h5 style="color:white">Last Name</h5>
+        <h1>{{ user.last_name }}</h1>
+        <hr class="solid">
+        <h5 style="color:white">Username</h5>
+        <h1>{{ user.username }}</h1>
+        <hr class="solid">
+        <h5 style="color:white">Email Address</h5>
+        <h1>{{ user.email }}</h1><br>
+        <a href="{% url 'edit-profile' %}" class="btn btn-primary" style="background-color: #00abab">Edit Profile</a>
+        <h1 style="color:transparent">.</h1>
+    </div>
+
+
 {% endblock content %}
-<p>

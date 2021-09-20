@@ -1,11 +1,15 @@
-{% extends 'events/base.html' %}
+{% extends "events/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    <fieldset>
-        {{ form.as_p }}
-    </fieldset>
-    <button type="submit">submit</button>
-</form>
-{% endblock %}
+    <div class="container" style="background-color: #88baba; border-radius: 10px">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                {{ form|crispy }}
+            </fieldset><br>
+        <button class="btn btn-primary" type="submit" style="background-color: #00abab">Update</button>
+        <a href="{% url 'password_reset' %}" class="btn btn-primary" style="background-color: #00abab">Change Password</a>
+        </form><br>
+    </div>
+{% endblock content %}

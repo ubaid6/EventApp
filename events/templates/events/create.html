@@ -1,11 +1,14 @@
-{#{% extends "events/base.html" %}#}
+{% extends "events/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset>
-            {{ form.as_p }}
-        </fieldset>
-    <button type="submit">Create</button>
-    </form>
+    <div class="container" style="background-color: #88baba; border-radius: 10px">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset>
+                {{ form|crispy }}
+            </fieldset><br>
+        <button class="btn btn-primary" type="submit" style="background-color: #00abab">Create</button>
+        </form><br>
+    </div>
 {% endblock content %}

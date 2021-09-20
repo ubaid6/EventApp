@@ -77,6 +77,8 @@ class editEvent(UpdateView):
     template_name = 'events/editevent.html'
 
 
+
+
 class deleteEvent(DeleteView):
     model = Event
     template_name = 'events/delete.html'

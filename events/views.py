@@ -8,13 +8,13 @@ from .models import Event, UserEventInfo
 from django.contrib import messages
 from users.models import User
 from django.views.generic.edit import UpdateView, DeleteView
-
+from django.core.paginator import Paginator
 # Create your views here.
 
 @login_required(login_url='login')
 def home(request):
 
-    print(request.user.emailAuthenticated)
+    # print(request.user.emailAuthenticated)
 
     for object in UserEventInfo.objects.all():
         object.function()
@@ -35,13 +35,16 @@ def home(request):
         else:
             event.shouldAttend = False
         event.save()
-        print(n, len(UserEventInfo.objects.all()))
+        # print(n, len(UserEventInfo.objects.all()))
         n = 0
 
+    events_paginator = Paginator(Event.objects.all().order_by('-date_posted'), 10)
+    events = events_paginator.get_page(1)
 
 
     context = {
-        'events': Event.objects.all(),
+        # 'events': Event.objects.all(),
+        'events': events,
         'eventinfo': UserEventInfo.objects.all(),
     }
     return render(request, 'events/events.html', context)
@@ -61,7 +64,7 @@ def create(request):
             userEventInfo.event = instance
             userEventInfo.isCreator = True
             userEventInfo.save()
-            messages.success(request, 'It worked!')
+            messages.success(request, 'Event created!')
             return redirect('events-home')
     else:
         form = CreateEvent()
@@ -106,6 +109,16 @@ def unattend(request, id):
 
     messages.success(request, f'You have unsubscribed from {event.title}')
     return redirect('events-home')
+
+
+@login_required(login_url='login')
+def myEvents(request):
+    context = {
+        'events': Event.objects.all(),
+        'userEventInfo': UserEventInfo.objects.all()
+    }
+
+    return render(request, 'events/my-events.html', context)
 
 
 

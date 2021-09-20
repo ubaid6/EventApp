@@ -3,22 +3,33 @@
 
 <p>
 {% block content %}
-    {% for event in events %}
-        {% if event.shouldAttend == True %}
-            <a href={% url 'attend' event.pk %}>Subscribe</a>
-        {% else %}
-            <a href={% url 'unattend' event.pk %}>Unsubscribe</a>
-        {% endif %}
-        {% if event.author == request.user %}
-            <a href={% url 'edit' event.pk %}>Edit</a>
-            <a href={% url 'delete' event.pk %}>Delete</a>
-        {% endif %}
-        <h1>{{ event.author }}</h1>
-        <h2>{{ event.title }}</h2>
-        <h3>{{ event.content }}</h3>
-        <h4>{{ event.date_posted }}</h4>
-        <h5>Users subscribed: {{ event.subscribed }}</h5>
+    {% for event in events.object_list %}
+        <div class="container" style="width:1000px">
+            <div class="card">
+                <div class="card-header" style="text-indent: 5px "> {{ event.author }}
+                    <small class="text-dark">{{ event.date_posted|date:"F d, Y" }}</small>
+                </div>
+                <div class="card-main" style="text-indent: 10px">
+                    <h1 class="card-title">{{ event.title }}</h1>
+                    <div class="card-text">
+                        {{ event.content }}
+                    </div><br><br>
+                        {% if event.shouldAttend == True %}
+                            <a href="{% url 'attend' event.pk %}" class="btn btn-primary" style="background-color: #00abab">Subscribe</a>
+                        {% else %}
+                            <a href="{% url 'unattend' event.pk %}" class="btn btn-primary" style="background-color: darkred">Unsubscribe</a>
+                        {% endif %}
+                        {% if event.author == request.user %}
+                            <a href="{% url 'edit' event.pk %}" class="btn btn-primary" style="background-color: #00abab">Edit</a>
+                            <a href="{% url 'delete' event.pk %}" class="btn btn-primary" style="background-color: #00abab">Delete</a>
+                        {% endif %}
+                </div>
+            </div><br><br><br><br><br>
+        </div>
     {% endfor %}
+    {% if events.has_next %}
+        <a href="#">Next Page</a>
+    {% endif %}
 {% endblock content %}
 <p>
 

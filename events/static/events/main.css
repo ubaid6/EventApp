@@ -1,0 +1,11 @@
+
+
+.btn, .btn-primary{
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.btn:hover, .btn-primary:hover, .btn:focus, .btn-primary:focus, .btn:active, .btn-primary:active {
+  background-color: #027a64;
+  border-color: transparent;
+}

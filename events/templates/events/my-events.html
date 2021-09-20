@@ -1,0 +1,46 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+    <div class="container" style="float: left; width:800px; background-color: #88baba; border-radius: 10px;">
+        <h1 style="color: white; text-align: center">Your Events</h1>
+        {% for event in events %}
+            {% if event.author == request.user %}
+            <div class="card">
+                <div class="card-header" style="text-indent: 5px; background-color: #00abab"> {{ event.author }}
+                    <small class="text-dark">{{ event.date_posted|date:"F d, Y" }}</small>
+                </div>
+                <div class="card-main" style="text-indent: 10px">
+                    <h1 class="card-title">{{ event.title }}</h1>
+                    <div class="card-text">
+                        {{ event.content }}
+                    </div><br><br>
+                            <a href="{% url 'edit' event.pk %}" class="btn btn-primary" style="background-color: #00abab">Edit</a>
+                            <a href="{% url 'delete' event.pk %}" class="btn btn-primary" style="background-color: #00abab">Delete</a>
+                </div>
+            </div><br><br><br><br><br>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="container" style="float: right; width:800px; background-color: #88baba; border-radius: 10px">
+    <h1 style="color: white; text-align: center">Events You're Attending</h1>
+    {% for eventinfo in userEventInfo %}
+        {% if eventinfo.user == request.user and eventinfo.isAttending %}
+            <div class="card">
+                <div class="card-header" style="text-indent: 5px;background-color: #00abab "> {{ eventinfo.event.author }}
+                    <small class="text-dark">{{ eventinfo.event.date_posted|date:"F d, Y" }}</small>
+                </div>
+                <div class="card-main" style="text-indent: 10px">
+                    <h1 class="card-title">{{ eventinfo.event.title }}</h1>
+                    <div class="card-text">
+                        {{ eventinfo.event.content }}
+                    </div><br><br>
+                            <a href="{% url 'unattend' eventinfo.event.pk %}" class="btn btn-primary" style="background-color: darkred">Unsubscribe</a>
+                </div>
+            </div><br><br><br><br><br>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+
+{% endblock content %}

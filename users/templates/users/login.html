@@ -9,18 +9,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 </head>
 
-<body style="text-align:center">
-    <h1 style="color: #00abab">Please enter your login details</h1>
-    <br>
-    {% block content %}
+{% load crispy_forms_tags %}
+
+{#<body style="text-align:center">#}
+{#    <h1 style="color: #00abab">Please enter your login details</h1>#}
+{#    <br>#}
+{#    {% block content %}#}
+{#        <form method="POST">#}
+{#            {% csrf_token %}#}
+{#            <fieldset>#}
+{#                {{ form.as_p }}#}
+{#                <button class="btn btn-primary" style="background-color: #00abab" type="submit">Log in</button>#}
+{#            </fieldset>#}
+{#        </form>#}
+{#    {% endblock content %}#}
+{#</body>#}
+
+{% block content %}
+    <br><br><br><br><br><br>
+    <div class="container" style="background-color: #88baba; border-radius: 10px">
+        <h1 style="color:white">Please enter your login details</h1>
         <form method="POST">
             {% csrf_token %}
             <fieldset>
-                {{ form.as_p }}
-                <button class="btn btn-primary" style="background-color: #00abab" type="submit">Log in</button>
-            </fieldset>
+                {{ form|crispy }}
+            </fieldset><br>
+        <button class="btn btn-primary" type="submit" style="background-color: #00abab">Login</button>
         </form>
-    {% endblock content %}
-</body>
+        <a href="{% url 'password_reset' %}">Forgot your password?</a><br>
+        <text-white style="color:white">Don't have an account? </text-white><a href="{% url 'register' %}">Sign Up</a>
+    </div>
+{% endblock content %}
 
 </html>
